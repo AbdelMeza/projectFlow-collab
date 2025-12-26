@@ -33,7 +33,7 @@ export default function LoginPage() {
                     />
                 </div>
                 <br />
-                <div className="passowrd">
+                <div className="password">
                     <label htmlFor="password">Password:</label>
                     <input
                         type="password"
@@ -45,10 +45,10 @@ export default function LoginPage() {
                     />
                 </div>
 
-                <button type="submit">Login</button>
                 <p>
-                    Don't have an account? <span onClick={() => navigate('/signup')}>Sign up</span>
+                    Don't have an account? <span style={{ cursor: "pointer", textDecoration: "underline" }} onClick={() => navigate('/signup')}>Sign up</span>
                 </p>
+                <button type="submit">Login</button>
             </div>
         </div>
     );

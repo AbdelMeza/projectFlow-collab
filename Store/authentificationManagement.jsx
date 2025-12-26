@@ -11,9 +11,9 @@ const authentificationManagement = create((set) => ({
             return
         }
         try {
-            const res = await fetch("http://127.0.0.1:2005/auth/data", {
-                method: "POST",
-                headers: { token: userToken, "Content-Type": "application/json", },
+            const res = await fetch("http://127.0.0.1:2026/auth/data", {
+                method: "GET",
+                headers: { token: userToken },
             })
 
             const data = await res.json()
@@ -29,9 +29,9 @@ const authentificationManagement = create((set) => ({
         }
     },
 
-    validateSignup: async ({ values }) => {
+    validateSignup: async (values) => {
         try {
-            const res = await fetch("http://127.0.0.1:2005/auth/signup", {
+            const res = await fetch("http://127.0.0.1:2026/auth/signup", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", },
                 body: JSON.stringify(values),
@@ -54,7 +54,7 @@ const authentificationManagement = create((set) => ({
 
     validateLogin: async ({ values }) => {
         try {
-            const res = await fetch("http://127.0.0.1:2005/auth/login", {
+            const res = await fetch("http://127.0.0.1:2026/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", },
                 body: JSON.stringify(values),
@@ -75,3 +75,5 @@ const authentificationManagement = create((set) => ({
         }
     },
 }))
+
+export default authentificationManagement

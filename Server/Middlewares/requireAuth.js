@@ -7,12 +7,12 @@ export default function requireAuth(req, res, next) {
         return res.status(401).json({ message: "No token provided" })
     }
 
-    const readToken = readToken(token)
+    const tokenRead = readToken(token)
 
-    if (!readToken) {
+    if (!tokenRead) {
         return res.status(401).json({ message: "Invalid token" })
     }
 
-    req.userId = readToken.id
+    req.userId = tokenRead.id
     next()
 }

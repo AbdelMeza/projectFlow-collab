@@ -5,7 +5,7 @@
     justify-content: center;
     height: 100vh;
     background-color: #f0f0f0;
-    width: 100vw;
+    width: 100%;
 }
 .signup-container{
     background-color: #fff;
@@ -40,6 +40,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: 20px;
 }
 .signup-container button:hover {
     background-color: #218838;

@@ -1,14 +1,16 @@
-import React from "react";
 import "./signupPage.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import authentificationManagement from "../../Store/authentificationManagement";
+
 export default function SignupPage() {
+  const navigate = useNavigate()
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
-  console.log(username, email, password, role);
-  const navigate = useNavigate()
+
+  const { validateSignup } = authentificationManagement()
+
   const handlChange = (e) => {
     const { name, value } = e.target;
     if (name === "username") {
@@ -17,10 +19,26 @@ export default function SignupPage() {
       setEmail(value);
     } else if (name === "password") {
       setPassword(value);
-    } else if (name === "role") {
-      setRole(value);
     }
-  };
+  }
+
+  const handleSubmit = async () => {
+    const values = {
+      username: username,
+      email: email,
+      password: password
+    }
+
+    try {
+      const isValid = await validateSignup(values)
+
+      if (isValid) {
+        navigate('/')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="signup-page">
@@ -36,7 +54,6 @@ export default function SignupPage() {
             onChange={handlChange}
           />
         </div>
-        <br />
         <div className="email">
           <label htmlFor="email">Email:</label>
           <input
@@ -47,7 +64,6 @@ export default function SignupPage() {
             onChange={handlChange}
           />
         </div>
-        <br />
         <div className="password">
           <label htmlFor="password">Password:</label>
           <input
@@ -58,18 +74,10 @@ export default function SignupPage() {
             onChange={handlChange}
           />
         </div>
-        <br />
-        <div className="role">
-          <label htmlFor="role">Role:</label>
-          <select id="role" name="role" required onChange={handlChange}>
-            <option value="user">Client</option>
-            <option value="admin">Freelancer</option>
-          </select>
-        </div>
-        <button type="submit">Signup</button>
         <p>
-          Already have an account? <span onClick={() => navigate('/login')}>Login</span>
+          Already have an account? <span style={{ cursor: "pointer", textDecoration: "underline" }} onClick={() => navigate('/login')}>Login</span>
         </p>
+        <button type="submit" onClick={() => handleSubmit()}>Signup</button>
       </div>
     </div>
   );
