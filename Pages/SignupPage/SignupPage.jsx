@@ -8,7 +8,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
   console.log(username, email, password, role);
-const navigate = useNavigate()
+  const navigate = useNavigate()
   const handlChange = (e) => {
     const { name, value } = e.target;
     if (name === "username") {

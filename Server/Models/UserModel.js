@@ -14,7 +14,11 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    affiliatedProjects: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'project'
+    }]
 })
 
 export const userModel = mongoose.model('user', userSchema)

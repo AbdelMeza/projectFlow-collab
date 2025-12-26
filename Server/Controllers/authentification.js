@@ -10,19 +10,31 @@ export async function signUp(req, res) {
             return res.status(401).json({ error: "All fields are required" })
         }
 
+        const userExists = await userModel.findOne({ $or: [{ username }, { email }] })
+
+        if (userExists) {
+            return res.status(409).json({ error: "User already exists" })
+        }
+
         const hashPass = await hashPassword(password)
 
         if (!hashPass) {
             return res.status(500).json({ error: "Authentification error, try again" })
         }
 
-        const userToken = createToken()
+        let newUser = await userModel.create({ username, email, password: hashPass })
+
+        if (!newUser) {
+            return res.status(500).json({ error: "Authentification error, try again" })
+        }
+
+        const { _id } = newUser
+        const userToken = createToken({ id: _id })
 
         if (!userToken) {
             return res.status(500).json({ error: "Authentification error, try again" })
         }
 
-        let newUser = await userModel.create({ username, email, password: hashPass })
         newUser = newUser.toObject()
         delete newUser.password
 
@@ -49,6 +61,8 @@ export async function login(req, res) {
             $or: [{ username: identifier }, { email: identifier }]
         })
 
+        const { _id } = user
+
         if (!user) {
             return res.status(404).json({ error: "User not found" })
         }
@@ -61,7 +75,7 @@ export async function login(req, res) {
             res.status(401).json({ error: "Wrong informations, try again" })
         }
 
-        const userToken = createToken()
+        const userToken = createToken({ id: _id })
 
         if (!userToken) {
             return res.status(500).json({ error: "Authentification error, try again" })
