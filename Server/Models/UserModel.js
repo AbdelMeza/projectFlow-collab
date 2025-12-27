@@ -15,10 +15,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    role: {
+        type: String,
+        enum: ["freelancer", "client"]
+    },
     affiliatedProjects: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'project'
-    }]
+    }],
+    activity: {
+        type: Boolean,
+        default: false
+    }
 })
 
 export const userModel = mongoose.model('user', userSchema)

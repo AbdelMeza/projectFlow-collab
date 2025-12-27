@@ -4,9 +4,9 @@ import { createToken } from "../Utils/token.js"
 
 export async function signUp(req, res) {
     try {
-        const { username, email, password } = req.body
+        const { username, email, password, role } = req.body
 
-        if (!username || !email || !password) {
+        if (!username || !email || !password || !role) {
             return res.status(401).json({ error: "All fields are required" })
         }
 
@@ -22,14 +22,14 @@ export async function signUp(req, res) {
             return res.status(500).json({ error: "Authentification error, try again" })
         }
 
-        let newUser = await userModel.create({ username, email, password: hashPass })
+        let newUser = await userModel.create({ username, email, password: hashPass, role })
 
         if (!newUser) {
             return res.status(500).json({ error: "Authentification error, try again" })
         }
 
         const { _id } = newUser
-        const userToken = createToken({ id: _id })
+        const userToken = createToken({ id: _id, role })
 
         if (!userToken) {
             return res.status(500).json({ error: "Authentification error, try again" })
@@ -61,7 +61,7 @@ export async function login(req, res) {
             $or: [{ username: identifier }, { email: identifier }]
         })
 
-        const { _id } = user
+        const { _id, role } = user
 
         if (!user) {
             return res.status(404).json({ error: "User not found" })
@@ -75,7 +75,7 @@ export async function login(req, res) {
             res.status(401).json({ error: "Wrong informations, try again" })
         }
 
-        const userToken = createToken({ id: _id })
+        const userToken = createToken({ id: _id, role })
 
         if (!userToken) {
             return res.status(500).json({ error: "Authentification error, try again" })

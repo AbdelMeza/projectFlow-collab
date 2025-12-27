@@ -8,6 +8,7 @@ export default function SignupPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("freelancer");
 
   const { validateSignup } = authentificationManagement()
 
@@ -19,6 +20,8 @@ export default function SignupPage() {
       setEmail(value);
     } else if (name === "password") {
       setPassword(value);
+    } else if (name === "role") {
+      setRole(value);
     }
   }
 
@@ -26,9 +29,9 @@ export default function SignupPage() {
     const values = {
       username: username,
       email: email,
-      password: password
+      password: password,
+      role: role.toLowerCase()
     }
-
     try {
       const isValid = await validateSignup(values)
 
@@ -73,6 +76,13 @@ export default function SignupPage() {
             required
             onChange={handlChange}
           />
+        </div>
+        <div className="role">
+          <label htmlFor="role">Role:</label>
+          <select id="role" name="role" required onChange={handlChange}>
+            <option value="freelancer" defaultValue={"freelancer"}>Freelancer</option>
+            <option value="client">Client</option>
+          </select>
         </div>
         <p>
           Already have an account? <span style={{ cursor: "pointer", textDecoration: "underline" }} onClick={() => navigate('/login')}>Login</span>

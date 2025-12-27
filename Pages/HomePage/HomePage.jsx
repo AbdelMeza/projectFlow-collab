@@ -1,8 +1,18 @@
+import { useEffect } from "react";
 import authentificationManagement from "../../Store/authentificationManagement";
 import "./HomePage.css";
 
 export default function HomePage() {
-    const { userData } = authentificationManagement()
+    const { getUserData, userData } = authentificationManagement()
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            await getUserData()
+        }
+
+        fetchUserData()
+    }, [])
+
     return (
         <main className="homepage">
             <nav className="navbar">
