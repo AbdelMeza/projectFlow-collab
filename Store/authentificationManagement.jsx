@@ -52,7 +52,7 @@ const authentificationManagement = create((set) => ({
         }
     },
 
-    validateLogin: async ({ values }) => {
+    validateLogin: async (values) => {
         try {
             const res = await fetch("http://127.0.0.1:2026/auth/login", {
                 method: "POST",

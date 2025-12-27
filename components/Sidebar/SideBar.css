@@ -1,0 +1,36 @@
+.side-bar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 15vw;
+    background: #201f25;
+    border-right: 1px solid grey;
+    padding: 1vw;
+    color: white;
+}
+
+.side-bar .header{
+    font-weight: 900;
+    height: 80px;
+}
+
+.side-bar .navigation-container{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.side-bar .navigation-container .navigation-item{
+    height: 45px;
+    display: flex;
+    align-items: center;
+    padding: 0 0.8vw;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.side-bar .navigation-container .navigation-item.active{
+    background: rgba(255, 255, 255, 0.05);
+}

@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import authentificationManagement from "../../Store/authentificationManagement";
 import "./HomePage.css";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
     const { getUserData, userData } = authentificationManagement()
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -22,7 +24,7 @@ export default function HomePage() {
                 <div className="side-content">
                     {userData && (<span className="username" style={{ cursor: "pointer" }}>{userData?.user.username}</span>)}
                     {userData ?
-                        <button className="primary-btn">
+                        <button className="primary-btn" onClick={() => navigate('/dashboard')}>
                             Dashboard
                         </button> :
                         <button className="primary-btn">

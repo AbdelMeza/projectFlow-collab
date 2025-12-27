@@ -1,3 +1,5 @@
+import { projectModel } from "../Models/projectModel.js"
+import { requestModel } from "../Models/requestModel.js"
 import { userModel } from "../Models/UserModel.js"
 
 export async function getUser(req, res) {
@@ -9,6 +11,22 @@ export async function getUser(req, res) {
         }
 
         res.status(200).json({ user })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: "Server error, try again" })
+    }
+}
+
+export async function getInfos(req, res) {
+    try {
+        const projects = await projectModel.find({ owner: req.userId })
+        const requests = await requestModel.find({ receiver: req.userId })
+
+        if (!projects || !requests) {
+            return res.status(500).json({ error: "Server error, try again" })
+        }
+
+        res.status(200).json({ projects, requests })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ error: "Server error, try again" })

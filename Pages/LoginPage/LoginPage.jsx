@@ -2,11 +2,13 @@ import React from "react";
 import { useState } from "react";
 import "./loginPage.css";
 import { useNavigate } from "react-router-dom";
+import authentificationManagement from "../../Store/authentificationManagement";
 
 export default function LoginPage() {
     const navigate = useNavigate()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { validateLogin } = authentificationManagement()
     console.log(email, password);
     const handlChange = (e) => {
         const { name, value } = e.target;
@@ -15,7 +17,19 @@ export default function LoginPage() {
         } else if (name === "password") {
             setPassword(value);
         }
-    };
+    }
+
+    const handleSubmit = async () => {
+        const values = {
+            identifier: email,
+            password: password
+        }
+        const isValid = await validateLogin(values)
+
+        if (isValid) {
+            navigate('/')
+        }
+    }
 
     return (
         <div className="login-page">
@@ -48,7 +62,7 @@ export default function LoginPage() {
                 <p>
                     Don't have an account? <span style={{ cursor: "pointer", textDecoration: "underline" }} onClick={() => navigate('/signup')}>Sign up</span>
                 </p>
-                <button type="submit">Login</button>
+                <button type="submit" onClick={() => handleSubmit()}>Login</button>
             </div>
         </div>
     );

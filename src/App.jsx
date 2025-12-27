@@ -16,7 +16,12 @@ function App() {
       <RequireAuth>
         <Dashboard />
       </RequireAuth>
-    } ></Route>
+    } >
+      <Route path='' element></Route>
+      <Route path='projects' element></Route>
+      <Route path='requests' element></Route>
+      <Route path='clients' element></Route>
+    </Route>
   </Routes>
 }
 

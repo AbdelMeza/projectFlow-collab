@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'project'
     }],
+    requests: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    },
     activity: {
         type: Boolean,
         default: false

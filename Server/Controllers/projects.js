@@ -37,13 +37,3 @@ export async function addClientToProject(req, res) {
         return res.status(500).json({ error: "Server error, try again" })
     }
 }
-
-export async function getUserProjects(req, res) {
-    try {
-        const projects = await projectModel.find({ owner: req.userId })
-        res.status(200).json({ projects })
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({ error: "Server error, try again" })
-    }
-}

@@ -4,6 +4,7 @@ import mongoose from "mongoose"
 import authRouter from "./Routers/authRouter.js"
 import { Server } from "socket.io"
 import http from "http"
+import userRouter from "./Routers/userRouter.js"
 
 const app = express()
 const server = http.createServer(app)
@@ -24,6 +25,7 @@ io.on("connect", (socket) => {
 })
 
 app.use('/auth', authRouter)
+app.use('/user', userRouter)
 
 mongoose.connect('mongodb://localhost:27017/ProjectFlow')
 
