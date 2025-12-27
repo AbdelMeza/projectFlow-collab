@@ -1,7 +1,11 @@
+import { create } from "zustand"
+
 const userManagement = create((set) => ({
-    profileData: [],
+    profileData: null,
 
     getData: async () => {
+        const userToken = localStorage.getItem("userToken")
+
         try {
             const res = await fetch("http://127.0.0.1:2026/user/data", {
                 method: "GET",
@@ -9,8 +13,8 @@ const userManagement = create((set) => ({
             })
 
             const data = await res.json()
-
-            if (!data.ok) return
+            
+            if (!data) return
 
             set({ profileData: data })
         } catch (error) {
@@ -18,3 +22,5 @@ const userManagement = create((set) => ({
         }
     }
 }))
+
+export default userManagement

@@ -1,10 +1,11 @@
-import express from "express"
-import cors from "cors"
-import mongoose from "mongoose"
-import authRouter from "./Routers/authRouter.js"
-import { Server } from "socket.io"
 import http from "http"
+import cors from "cors"
+import express from "express"
+import mongoose from "mongoose"
+import { Server } from "socket.io"
+import authRouter from "./Routers/authRouter.js"
 import userRouter from "./Routers/userRouter.js"
+import projectsRouter from "./Routers/projectsRouter.js"
 
 const app = express()
 const server = http.createServer(app)
@@ -26,6 +27,7 @@ io.on("connect", (socket) => {
 
 app.use('/auth', authRouter)
 app.use('/user', userRouter)
+app.use('/project', projectsRouter)
 
 mongoose.connect('mongodb://localhost:27017/ProjectFlow')
 

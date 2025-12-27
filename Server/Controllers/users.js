@@ -19,8 +19,8 @@ export async function getUser(req, res) {
 
 export async function getInfos(req, res) {
     try {
-        const projects = await projectModel.find({ owner: req.userId })
-        const requests = await requestModel.find({ receiver: req.userId })
+        const projects = await projectModel.find({ owner: req.userId }).sort({ createdAt: -1 })
+        const requests = await requestModel.find({ receiver: req.userId }).sort({ createdAt: -1 })
 
         if (!projects || !requests) {
             return res.status(500).json({ error: "Server error, try again" })

@@ -105,13 +105,16 @@ body {
 ========================= */
 .primary-btn {
     background: var(--text-main);
+    height: max-content;
     color: #fff;
     border: none;
-    padding: 16px 30px;
-    border-radius: 14px;
+    padding: 16px 20px;
+    border-radius: 12px;
     font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
+    display: flex;
+    gap: 5px;
 }
 
 .secondary-btn {

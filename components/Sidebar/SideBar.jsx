@@ -5,7 +5,6 @@ export default function SideBar({ navigation }) {
     const navigate = useNavigate()
     const location = useLocation()
     const path = location.pathname
-    console.log(path)
 
     return <div className="side-bar">
         <div className="header">

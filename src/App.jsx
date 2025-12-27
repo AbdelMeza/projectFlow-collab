@@ -2,10 +2,9 @@ import { Route, Routes } from 'react-router-dom'
 import SignupPage from '../Pages/SignupPage/SignupPage'
 import LoginPage from '../Pages/LoginPage/LoginPage'
 import HomePage from '../Pages/HomePage/HomePage'
-import authentificationManagement from '../Store/authentificationManagement'
-import { useEffect } from 'react'
 import RequireAuth from '../RoutesProtection/requireAuth'
 import Dashboard from '../Pages/Dashboard/Dashboard'
+import ProjectsView from '../Pages/Dashboard/SubPages/Projects/Projects'
 
 function App() {
   return <Routes>
@@ -18,7 +17,7 @@ function App() {
       </RequireAuth>
     } >
       <Route path='' element></Route>
-      <Route path='projects' element></Route>
+      <Route path='projects' element={<ProjectsView />} ></Route>
       <Route path='requests' element></Route>
       <Route path='clients' element></Route>
     </Route>
