@@ -18,9 +18,10 @@
 }
 
 .projects-view .upper-content .side-content .counter {
-    width: 25px;
-    height: 25px;
-    border: 1px solid grey;
+    width: 30px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -41,19 +42,19 @@
 }
 
 .projects-table thead {
-    background: #201f25;
+    background: #201f2526;
 }
 
 .projects-table th {
     text-align: left;
-    padding: 16px;
+    padding: 10px 16px;
     font-size: 13px;
     font-weight: 500;
-    color: #ffffff;
+    color: #111;
 }
 
 .projects-table td {
-    padding: 16px;
+    padding: 10px 16px;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 

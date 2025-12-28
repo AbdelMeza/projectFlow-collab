@@ -4,13 +4,35 @@ const useCasesManagement = create((set) => ({
     addClientIsOpen: false,
     createProjectIsOpen: false,
     clientSearched: null,
+    projectDetails: null,
 
     openAddClient: () => set((state) => ({ addClientIsOpen: !state.addClientIsOpen })),
     openCreateProject: () => set((state) => ({ createProjectIsOpen: !state.createProjectIsOpen })),
 
+    getOneProject: async (id) => {
+        if (!id) {
+            return
+        }
+        const userToken = localStorage.getItem("userToken")
+        try {
+            const res = await fetch(`http://127.0.0.1:2026/project/${id}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    token: userToken
+                },
+            })
+
+            const data = await res.json()
+
+            set({ projectDetails: data })
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
     createProject: async (values) => {
         const userToken = localStorage.getItem("userToken")
-        console.log(values)
         try {
             const res = await fetch("http://127.0.0.1:2026/project/create", {
                 method: "POST",

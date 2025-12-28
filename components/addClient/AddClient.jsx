@@ -18,6 +18,15 @@ export default function AddClient({ selectedProject }) {
         return () => clearTimeout(searchTimeOut)
     }, [search])
 
+    const handleAddClient = async (clientId) => {
+        await addClient({
+            projectId: selectedProject,
+            clientId
+        })
+
+        window.location.reload()
+    }
+
     return <div className="add-client-container">
         <div className="close" onClick={() => openAddClient()}>
             <svg xmlns="http://www.w3.org/2000/svg" width={15} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -39,13 +48,7 @@ export default function AddClient({ selectedProject }) {
                             clientSearched.map(c => (
                                 <span
                                     className="user-item" key={c}
-                                    onClick={() => {
-                                        addClient({
-                                            projectId: selectedProject,
-                                            clientId: c._id
-                                        }),
-                                        window.location.reload()
-                                    }}
+                                    onClick={() => handleAddClient(c._id)}
                                 >
                                     {c.username}
                                 </span>

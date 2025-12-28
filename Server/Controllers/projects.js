@@ -4,7 +4,6 @@ import { userModel } from "../Models/UserModel.js"
 
 export async function createProject(req, res) {
     try {
-        console.log(req.body)
         const { title, deadline } = req.body
 
         if (!title || !deadline) {
@@ -39,7 +38,7 @@ export async function addClientToProject(req, res) {
         const project = await projectModel.findOne({ _id: projectId })
 
         if (!project) {
-            return res.status(400).json({ error: "Cannot find project" })
+            return res.status(404).json({ error: "Cannot find project" })
         }
 
         if (project.client) {
@@ -53,6 +52,29 @@ export async function addClientToProject(req, res) {
         // io.join(`${username}/${projectName}`)
 
         res.status(200).json({ message: "Client added successfuly" })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: "Server error, try again" })
+    }
+}
+
+export async function getOneProject(req, res) {
+    try {
+        const id = req.params?.id
+
+        if (!id) {
+            return res.status(400).json({ error: "Project id is required" })
+        }
+
+        const project = await projectModel.findOne({ _id: id, $or: [{ owner: req.userId }, { client: req.userId }] })
+            .populate("client", "username")
+            .populate("owner", "username")
+
+        if (!project) {
+            return res.status(404).json({ error: "Cannot find project" })
+        }
+
+        res.status(200).json(project)
     } catch (error) {
         console.log(error)
         return res.status(500).json({ error: "Server error, try again" })

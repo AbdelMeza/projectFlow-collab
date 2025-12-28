@@ -5,6 +5,7 @@ import HomePage from '../Pages/HomePage/HomePage'
 import RequireAuth from '../RoutesProtection/requireAuth'
 import Dashboard from '../Pages/Dashboard/Dashboard'
 import ProjectsView from '../Pages/Dashboard/SubPages/Projects/Projects'
+import ProjectDetails from '../Pages/Dashboard/SubPages/Projects/ProjectDetails/ProjectDetails'
 
 function App() {
   return <Routes>
@@ -18,8 +19,8 @@ function App() {
     } >
       <Route path='' element></Route>
       <Route path='projects' element={<ProjectsView />} ></Route>
+      <Route path='projects/:id' element={<ProjectDetails />}></Route>
       <Route path='requests' element></Route>
-      <Route path='clients' element></Route>
     </Route>
   </Routes>
 }

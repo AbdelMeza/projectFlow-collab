@@ -19,7 +19,7 @@ export async function getUser(req, res) {
 
 export async function getInfos(req, res) {
     try {
-        const projects = await projectModel.find({ owner: req.userId })
+        const projects = await projectModel.find({ $or: [{ owner: req.userId }, { client: req.userId }] })
             .populate("client", " _id username")
             .sort({ createdAt: -1 })
         const requests = await requestModel.find({ receiver: req.userId }).sort({ createdAt: -1 })

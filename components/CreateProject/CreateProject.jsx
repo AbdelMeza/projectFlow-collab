@@ -28,7 +28,6 @@ export default function CreateProject() {
         window.location.reload()
     }
 
-
     return <div className="create-project-container">
         <div className="close" onClick={() => openCreateProject()}>
             <svg xmlns="http://www.w3.org/2000/svg" width={15} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

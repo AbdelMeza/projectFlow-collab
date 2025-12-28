@@ -28,10 +28,7 @@ export default function Dashboard() {
         }, {
             title: "Requests",
             navigation: "dashboard/requests"
-        }, {
-            title: "Client",
-            navigation: "dashboard/clients"
-        },
+        }
     ]
 
     return (

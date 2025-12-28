@@ -1,0 +1,13 @@
+.project-details{
+    padding: 2vw;
+}
+
+.project-details .header{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 2vw;
+}
+
+.project-details .header .title{
+    font-weight: bold;
+}

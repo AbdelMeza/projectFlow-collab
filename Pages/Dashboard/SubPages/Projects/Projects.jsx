@@ -3,7 +3,7 @@ import './Projects.css'
 import userManagement from "../../../../Store/UserManagement"
 import useCasesManagement from "../../../../Store/useCasesManagement"
 import AddClient from "../../../../components/addClient/AddClient"
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import Status from "../../../../components/Status/Status"
 import CreateProject from "../../../../components/CreateProject/CreateProject"
 
@@ -12,6 +12,8 @@ export default function ProjectsView() {
     const { getData, profileData } = userManagement()
     const { openAddClient, addClientIsOpen, openCreateProject, createProjectIsOpen } = useCasesManagement()
     const [selectedProject, setSelectedProject] = useState()
+    const navigate = useNavigate()
+
     useEffect(() => {
         setSearchParams("")
 
@@ -97,7 +99,7 @@ export default function ProjectsView() {
                                     </td>
 
                                     <td>
-                                        <button className="table-btn">View</button>
+                                        <button className="table-btn" onClick={() => navigate(`./${project._id}`)}>View</button>
                                     </td>
                                 </tr>
                             ))
