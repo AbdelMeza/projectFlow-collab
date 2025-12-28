@@ -1,10 +1,18 @@
-import { useEffect } from "react"
-import userManagement from "../../../../Store/UserManagement"
+import { useEffect, useState } from "react"
 import './Projects.css'
+import userManagement from "../../../../Store/UserManagement"
+import useCasesManagement from "../../../../Store/useCasesManagement"
+import AddClient from "../../../../components/addClient/AddClient"
+import { useSearchParams } from "react-router-dom"
 
 export default function ProjectsView() {
+    const [searchParams, setSearchParams] = useSearchParams()
     const { getData, profileData } = userManagement()
+    const { openAddClient, addClientIsOpen, openCreateProject } = useCasesManagement()
+    const [selectedProject, setSelectedProject] = useState()
     useEffect(() => {
+        setSearchParams("")
+
         async function fetchData() {
             await getData()
         }
@@ -14,10 +22,11 @@ export default function ProjectsView() {
         }
     }, [])
 
+    console.log(profileData)
     const projects = profileData?.projects
-    console.log(projects)
 
     return <div className="projects-view">
+        {addClientIsOpen && <AddClient selectedProject={selectedProject} />}
         <div className="upper-content">
             <div className="side-content">
                 <div className="page-title">Projects</div>
@@ -54,7 +63,17 @@ export default function ProjectsView() {
                                     </td>
 
                                     <td className="project-title">
-                                        {project.clientId?.username ? project.clientId.username : <button className="table-btn">Add</button> }
+                                        {project.client?.username ?
+                                            project.client.username :
+                                            <button
+                                                className="table-btn"
+                                                onClick={() => {
+                                                    setSelectedProject(project._id)
+                                                    openAddClient()
+                                                }}
+                                            >
+                                                Add
+                                            </button>}
                                     </td>
 
                                     <td>

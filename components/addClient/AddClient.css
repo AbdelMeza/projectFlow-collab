@@ -1,0 +1,72 @@
+.add-client-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(3px);
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-client-container .close{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    aspect-ratio: 1;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.add-client-container .content{
+    width: 350px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.add-client-container .content .search-bar-container{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.add-client-container .content .search-bar-container input{
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 45px;
+    border-radius: 8px;
+    padding: 0 15px;
+}
+
+.add-client-container .content .lower-content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-client-container .content .lower-content code{
+    opacity: 0.6;
+}
+
+.add-client-container .content .lower-content .result-container .user-item{
+    height: 45px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    padding: 0 15px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+    cursor: pointer;
+}

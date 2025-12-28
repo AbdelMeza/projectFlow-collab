@@ -21,8 +21,8 @@ export default function LoginPage() {
 
     const handleSubmit = async () => {
         const values = {
-            identifier: email,
-            password: password
+            identifier: email.trim(),
+            password: password.trim()
         }
         const isValid = await validateLogin(values)
 

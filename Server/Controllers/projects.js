@@ -1,3 +1,4 @@
+import { io } from "socket.io-client"
 import { projectModel } from "../Models/projectModel.js"
 import { userModel } from "../Models/UserModel.js"
 
@@ -20,18 +21,36 @@ export async function createProject(req, res) {
 }
 
 export async function addClientToProject(req, res) {
-    const { projectName } = req.body
+    const { projectId, clientId, projectName } = req.body
 
     try {
-        const user = await userModel.findById({ _id: req.user.id })
+        const user = await userModel.findById({ _id: clientId })
+
         if (!user) {
             return res.status(404).json({ error: "User not found" })
         }
-        const { username } = user
 
-        io.join(`${username}/${projectName}`)
+        if (user.role !== "client") {
+            return res.status(404).json({ error: "User must be registrer as a client" })
+        }
 
+        const project = await projectModel.findOne({ _id: projectId })
 
+        if (!project) {
+            return res.status(400).json({ error: "Cannot find project" })
+        }
+
+        if (project.client) {
+            return res.status(400).json({ error: "Project already has a client" })
+        }
+
+        project.client = clientId
+
+        await project.save()
+
+        // io.join(`${username}/${projectName}`)
+
+        res.status(200).json({ message: "Client added successfuly" })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ error: "Server error, try again" })

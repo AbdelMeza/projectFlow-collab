@@ -27,9 +27,9 @@ export default function SignupPage() {
 
   const handleSubmit = async () => {
     const values = {
-      username: username,
-      email: email,
-      password: password,
+      username: username.trim(),
+      email: email.trim(),
+      password: password.trim(),
       role: role.toLowerCase()
     }
     try {
