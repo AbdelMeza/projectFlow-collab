@@ -1,4 +1,4 @@
-.projects-view{
+.projects-view {
     display: flex;
     flex-direction: column;
     gap: 5vw;
@@ -7,17 +7,17 @@
     padding: 2vw;
 }
 
-.projects-view .upper-content{
+.projects-view .upper-content {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
-.projects-view .upper-content .side-content{
+.projects-view .upper-content .side-content {
     display: flex;
 }
 
-.projects-view .upper-content .side-content .counter{
+.projects-view .upper-content .side-content .counter {
     width: 25px;
     height: 25px;
     border: 1px solid grey;
@@ -29,60 +29,60 @@
 }
 
 .projects-table-wrapper {
-  border: 1px solid #0000003d;
-  border-radius: 14px;
-  overflow: hidden;
+    border: 1px solid #0000003d;
+    border-radius: 14px;
+    overflow: hidden;
 }
 
 .projects-table {
-  width: 100%;
-  border-collapse: collapse;
-  color: #111;
+    width: 100%;
+    border-collapse: collapse;
+    color: #111;
 }
 
 .projects-table thead {
-  background: #201f25;
+    background: #201f25;
 }
 
 .projects-table th {
-  text-align: left;
-  padding: 16px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #ffffff;
+    text-align: left;
+    padding: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #ffffff;
 }
 
 .projects-table td {
-  padding: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .project-title {
-  font-weight: 500;
+    font-weight: 500;
 }
 
 .date {
-  color: #111;
-  font-size: 14px;
+    color: #111;
+    font-size: 14px;
 }
 
 /* Actions */
 .table-btn {
-  background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  padding: 6px 12px;
-  border-radius: 8px;
-  color: #111;
-  cursor: pointer;
-  transition: background 0.2s;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #111;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
 .table-btn:hover {
-  background: rgba(0, 0, 0, 0.01);
+    background: rgba(0, 0, 0, 0.01);
 }
 
 .empty-state {
-  text-align: center;
-  padding: 40px;
-  color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    padding: 40px;
+    color: rgba(255, 255, 255, 0.5);
 }

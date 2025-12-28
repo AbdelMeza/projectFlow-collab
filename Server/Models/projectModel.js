@@ -18,6 +18,10 @@ const projectSchema = new mongoose.Schema({
     client: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
+    },
+    deadline: {
+        type: Date,
+        required: true
     }
 }, { timestamps: true })
 

@@ -1,0 +1,70 @@
+.create-project-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-project-container .close{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    aspect-ratio: 1;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.create-project-container .content{
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.create-project-container .upper-content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.create-project-container .input-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.create-project-container input{
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 45px;
+    border-radius: 8px;
+    padding: 0 15px;
+}
+
+.create-project-container button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.create-project-container button:disabled{
+    opacity: 0.8;
+    cursor: not-allowed;
+}

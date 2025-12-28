@@ -8,14 +8,17 @@ const useCasesManagement = create((set) => ({
     openAddClient: () => set((state) => ({ addClientIsOpen: !state.addClientIsOpen })),
     openCreateProject: () => set((state) => ({ createProjectIsOpen: !state.createProjectIsOpen })),
 
-    createProject: async (title) => {
+    createProject: async (values) => {
         const userToken = localStorage.getItem("userToken")
-
+        console.log(values)
         try {
             const res = await fetch("http://127.0.0.1:2026/project/create", {
                 method: "POST",
-                headers: { token: userToken },
-                body: JSON.parse(title),
+                headers: {
+                    "Content-Type": "application/json",
+                    token: userToken
+                },
+                body: JSON.stringify(values),
             })
         } catch (error) {
             console.log(error)

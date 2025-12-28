@@ -4,12 +4,14 @@ import { userModel } from "../Models/UserModel.js"
 
 export async function createProject(req, res) {
     try {
-        const { title } = req.body
-        if (!title) {
+        console.log(req.body)
+        const { title, deadline } = req.body
+
+        if (!title || !deadline) {
             return res.status(401).json({ error: "All fields are required" })
         }
-        const newProject = await projectModel.create({ title, owner: req.userId })
 
+        const newProject = await projectModel.create({ title, deadline, owner: req.userId })
         if (!newProject) {
             return res.status(500).json({ error: "Project creation error, try again" })
         }

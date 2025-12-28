@@ -1,3 +1,5 @@
+import './Status.css'
+
 export default function Status({ content }) {
     const statusType = () => {
         if (content === "Waiting") return "grey"

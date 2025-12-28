@@ -4,11 +4,13 @@ import userManagement from "../../../../Store/UserManagement"
 import useCasesManagement from "../../../../Store/useCasesManagement"
 import AddClient from "../../../../components/addClient/AddClient"
 import { useSearchParams } from "react-router-dom"
+import Status from "../../../../components/Status/Status"
+import CreateProject from "../../../../components/CreateProject/CreateProject"
 
 export default function ProjectsView() {
     const [searchParams, setSearchParams] = useSearchParams()
     const { getData, profileData } = userManagement()
-    const { openAddClient, addClientIsOpen, openCreateProject } = useCasesManagement()
+    const { openAddClient, addClientIsOpen, openCreateProject, createProjectIsOpen } = useCasesManagement()
     const [selectedProject, setSelectedProject] = useState()
     useEffect(() => {
         setSearchParams("")
@@ -22,18 +24,21 @@ export default function ProjectsView() {
         }
     }, [])
 
-    console.log(profileData)
     const projects = profileData?.projects
 
     return <div className="projects-view">
         {addClientIsOpen && <AddClient selectedProject={selectedProject} />}
+        {createProjectIsOpen && <CreateProject />}
         <div className="upper-content">
             <div className="side-content">
                 <div className="page-title">Projects</div>
                 <div className="counter">{projects?.length > 0 ? projects.length : 0}</div>
             </div>
             <div className="side-content">
-                <button className="primary-btn" style={{ display: "flex" }}>
+                <button className="primary-btn"
+                    style={{ display: "flex" }}
+                    onClick={() => openCreateProject()}
+                >
                     <svg xmlns="http://www.w3.org/2000/svg" width={15} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
@@ -50,6 +55,7 @@ export default function ProjectsView() {
                             <th>Client</th>
                             <th>Status</th>
                             <th>Created</th>
+                            <th>Deadline</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -78,12 +84,16 @@ export default function ProjectsView() {
 
                                     <td>
                                         <span className={`status-badge ${project.status.toLowerCase()}`}>
-                                            {project.status}
+                                            <Status content={project.status} />
                                         </span>
                                     </td>
 
                                     <td className="date">
                                         {new Date(project.createdAt).toLocaleDateString()}
+                                    </td>
+
+                                    <td className="deadline">
+                                        {new Date(project.deadline).toLocaleDateString()}
                                     </td>
 
                                     <td>
@@ -93,7 +103,7 @@ export default function ProjectsView() {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="5" className="empty-state" style={{ color: "#111", padding: "5vw 0" }}>
+                                <td colSpan="6" className="empty-state" style={{ color: "#111", padding: "5vw 0" }}>
                                     No projects yet
                                 </td>
                             </tr>
